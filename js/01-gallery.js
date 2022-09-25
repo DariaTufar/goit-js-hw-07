@@ -12,6 +12,7 @@ const renderMarkupTemplate = ({ preview, original, description }) =>
         src=${preview}
         data-source=${original}
         alt=${description}
+        
       />
     </a>
   </div>`;
