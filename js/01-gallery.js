@@ -29,9 +29,9 @@ imgContainer.insertAdjacentHTML("afterbegin", galleryList);
 
 imgContainer.addEventListener(`click`, onImageHandleClick);
 
-let instanceModal = basicLightbox.create(`<div class="modal">
-      </div>`);
-instanceModal.show();
+// let instanceModal = basicLightbox.create(`<div class="modal">
+//       </div>`);
+// instanceModal.show();
 
 // ---------EventListener for opening ------------
 function onImageHandleClick(evt) {
@@ -44,8 +44,10 @@ function onImageHandleClick(evt) {
   }
   const activeImg = evt.target;
 
-  let instanceModal = basicLightbox.create(`<div class="modal">
-    <img src = "${activeImg.dataset.source}"/> </div>`);
+  const instanceModal = basicLightbox.create(
+    `<img src="${activeImg.dataset.source}"/>`
+  );
+
   instanceModal.show();
 }
 // ---------EventListener for closing  with Escape on  keyboard-----
