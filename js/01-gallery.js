@@ -1,5 +1,4 @@
 import { galleryItems } from "./gallery-items.js";
-// import * as basicLightbox from "basiclightbox";
 // Change code below this line
 
 // ----------1-Creating Markup-------------
@@ -11,9 +10,7 @@ const renderMarkupTemplate = ({ preview, original, description }) =>
         class="gallery__image"
         src=${preview}
         data-source=${original}
-        alt=${description}
-        
-      />
+        alt=${description} />
     </a>
   </div>`;
 
@@ -23,20 +20,11 @@ const galleryList = galleryItems
   .join(``);
 imgContainer.insertAdjacentHTML("afterbegin", galleryList);
 
-// -----------------------------------------------------------
-
-// ----------2 --- EventListener -----
-
+// ----------2 --- EventListener for opening  -----
 imgContainer.addEventListener(`click`, onImageHandleClick);
 
-// let instanceModal = basicLightbox.create(`<div class="modal">
-//       </div>`);
-// instanceModal.show();
-
-// ---------EventListener for opening ------------
 function onImageHandleClick(evt) {
   evt.preventDefault();
-
   const isImgActive = evt.target.classList.contains("gallery__image");
 
   if (!isImgActive) {
@@ -47,17 +35,18 @@ function onImageHandleClick(evt) {
   const instanceModal = basicLightbox.create(
     `<img src="${activeImg.dataset.source}"/>`
   );
-
+  const store = { lightbox: null };
+  store.lightbox = instanceModal;
   instanceModal.show();
 }
 // ---------EventListener for closing  with Escape on  keyboard-----
-// ------ need tutors help ----
 imgContainer.addEventListener(`keydown`, onEscCloseModal, { once: true });
 
 function onEscCloseModal(evt) {
   if (evt.key === "Escape") {
-    console.log(`escape is pressed`);
-    console.log(instanceModal);
-    instanceModal.close();
+    if (store.lightbox && store.lightbox.close) {
+      store.lightbox.close();
+    }
   }
+  console.log(`escape is pressed!!!!evtlst working!!!!`);
 }
