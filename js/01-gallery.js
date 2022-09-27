@@ -15,6 +15,8 @@ const renderMarkupTemplate = ({ preview, original, description }) =>
   </div>`;
 
 const imgContainer = document.querySelector(".gallery");
+const store = { lightbox: null };
+
 const galleryList = galleryItems
   .map((item) => renderMarkupTemplate(item))
   .join(``);
@@ -35,12 +37,12 @@ function onImageHandleClick(evt) {
   const instanceModal = basicLightbox.create(
     `<img src="${activeImg.dataset.source}"/>`
   );
-  const store = { lightbox: null };
+
   store.lightbox = instanceModal;
   instanceModal.show();
 }
 // ---------EventListener for closing  with Escape on  keyboard-----
-imgContainer.addEventListener(`keydown`, onEscCloseModal, { once: true });
+imgContainer.addEventListener(`keydown`, onEscCloseModal);
 
 function onEscCloseModal(evt) {
   if (evt.key === "Escape") {
@@ -48,5 +50,4 @@ function onEscCloseModal(evt) {
       store.lightbox.close();
     }
   }
-  console.log(`escape is pressed!!!!evtlst working!!!!`);
 }
